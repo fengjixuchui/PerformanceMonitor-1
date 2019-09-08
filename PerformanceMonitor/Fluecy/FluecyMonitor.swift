@@ -1,5 +1,5 @@
 //
-//  CatonMonitor.swift
+//  FluecyMonitor.swift
 //  PerformanceMonitor
 //
 //  Created by roy.cao on 2019/8/25.
@@ -8,8 +8,9 @@
 // https://cloud.tencent.com/developer/article/1427933
 
 import Foundation
+import RCBacktrace
 
-public class CatonMonitor {
+public class FluecyMonitor {
     
     enum Constants {
         static let timeOutInterval: TimeInterval = 0.05
@@ -23,7 +24,6 @@ public class CatonMonitor {
     public init() {}
     
     public func start() {
-        let main = BackTrace.main_thread_t
         guard !isMonitoring else { return }
         
         isMonitoring = true
@@ -40,8 +40,14 @@ public class CatonMonitor {
                 Thread.sleep(forTimeInterval: Constants.timeOutInterval)
                 
                 if timeout {
-
-                    print(BackTrace.callStack(.main))
+                    DispatchQueue.main.async {
+                        let symbols = RCBacktrace.callstack(.main)
+                        print("Not fluecy ------------------------------------------------------------")
+                        for symbol in symbols {
+                            print(symbol.description)
+                        }
+                        print("Not fluecy -------------------------------------------------------------")
+                    }
                 }
                 self.semaphore.wait()
             }
