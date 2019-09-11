@@ -1,6 +1,6 @@
 //
-//  SwiftTrace.m
-//  SwiftTrace
+//  MethodTimeMonitor.m
+//  MethodTimeMonitor
 //
 //  Repo: https://github.com/johnno1962/SwiftTrace
 //  $Id: //depot/SwiftTrace/SwiftTrace/SwiftTrace.mm#37 $
@@ -149,6 +149,7 @@ static SPLForwardingTrampolinePage *nextTrampolinePage()
 
 IMP imp_implementationForwardingToTracer(void *patch, IMP onEntry, IMP onExit)
 {
+
     OSSpinLockLock(&lock);
 
     SPLForwardingTrampolinePage *dataPageLayout = nextTrampolinePage();
@@ -165,7 +166,7 @@ IMP imp_implementationForwardingToTracer(void *patch, IMP onEntry, IMP onExit)
     dataPageLayout->nextAvailableTrampolineIndex++;
 
     IMP implementation = (IMP)&dataPageLayout->trampolineEntryPoints[nextAvailableTrampolineIndex];
-    
+
     OSSpinLockUnlock(&lock);
     
     return implementation;

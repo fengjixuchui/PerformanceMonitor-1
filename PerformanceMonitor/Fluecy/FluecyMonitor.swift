@@ -5,7 +5,6 @@
 //  Created by roy.cao on 2019/8/25.
 //  Copyright © 2019 roy. All rights reserved.
 //
-// https://cloud.tencent.com/developer/article/1427933
 
 import Foundation
 import RCBacktrace
@@ -42,11 +41,11 @@ public class FluecyMonitor {
                 if timeout {
                     DispatchQueue.main.async {
                         let symbols = RCBacktrace.callstack(.main)
-                        print("Not fluecy ------------------------------------------------------------")
+                        print("👁 Not fluecy ------------------------------------------------------------")
                         for symbol in symbols {
                             print(symbol.description)
                         }
-                        print("Not fluecy -------------------------------------------------------------")
+                        print("👁 Not fluecy -------------------------------------------------------------")
                     }
                 }
                 self.semaphore.wait()

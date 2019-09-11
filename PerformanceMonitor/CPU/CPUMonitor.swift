@@ -5,8 +5,6 @@
 //  Created by roy.cao on 2019/8/24.
 //  Copyright © 2019 roy. All rights reserved.
 //
-// https://cloud.tencent.com/developer/article/1483621
-// 
 
 import Foundation
 
@@ -43,7 +41,7 @@ public class CPUMonitor {
         }
         
         let kerr = withUnsafeMutablePointer(to: &threads) {
-            return $0.withMemoryRebound(to: thread_act_array_t?.self, capacity: 1) {
+            $0.withMemoryRebound(to: thread_act_array_t?.self, capacity: 1) {
                 task_threads(mach_task_self_, $0, &count)
             }
         }

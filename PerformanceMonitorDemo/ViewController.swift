@@ -23,7 +23,16 @@ class ViewController: UIViewController {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        foo()
         let fpsVC = FPSTestViewController()
         self.navigationController?.pushViewController(fpsVC, animated: true)
+    }
+
+    func foo() {
+        bar()
+    }
+
+    func bar() {
+
     }
 }
